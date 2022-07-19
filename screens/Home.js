@@ -15,6 +15,7 @@ export default function Home() {
     localRestaurants,
   ]);
   const [city, setCity] = useState("Orlando");
+  const [activeTab, setActiveTab] = useState("Delivery");
 
   const getRestaurantsFromYelp = () => {
     const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}&limit=50`;
@@ -25,17 +26,23 @@ export default function Home() {
     };
     return fetch(yelpUrl, apiOptions)
       .then((res) => res.json())
-      .then((json) => setRestaurantData(json.businesses));
+      .then((json) =>
+        setRestaurantData(
+          json.businesses.filter((businesses) =>
+            businesses.transactions.includes(activeTab.toLowerCase())
+          )
+        )
+      );
   };
 
   useEffect(() => {
     getRestaurantsFromYelp();
-  }, [city]);
+  }, [city, activeTab]);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
       <View style={{ backgroundColor: "white", padding: 15 }}>
-        <HeaderTabs />
+        <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <SearchBar cityHandler={setCity} />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

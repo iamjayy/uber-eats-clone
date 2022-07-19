@@ -32,34 +32,19 @@ export const localRestaurants = [
   },
 ];
 
-export default function RestaurantItems({ navigation, ...props }) {
+export default function RestaurantItems(props) {
   return (
-    <>
+    <TouchableOpacity activeOpacity={1} style={{ marginBottom: 30 }}>
       {props.restaurantData.map((restaurant, index) => (
-        <TouchableOpacity
+        <View
           key={index}
-          activeOpacity={1}
-          style={{ marginBottom: 30 }}
-          onPress={() =>
-            navigation.navigate("RestaurantDetail", {
-              name: restaurant.name,
-              image: restaurant.image_url,
-              price: restaurant.price,
-              reviews: restaurant.review_count,
-              rating: restaurant.rating,
-              categories: restaurant.categories,
-            })
-          }
+          style={{ marginTop: 1, padding: 15, backgroundColor: "white" }}
         >
-          <View
-            style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
-          >
-            <RestaurantImage image={restaurant.image_url} />
-            <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
-          </View>
-        </TouchableOpacity>
+          <RestaurantImage image={restaurant.image_url} />
+          <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
+        </View>
       ))}
-    </>
+    </TouchableOpacity>
   );
 }
 
@@ -83,12 +68,12 @@ const RestaurantInfo = (props) => (
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      marginTop: 10,
+      marginTop: 1,
     }}
   >
     <View>
       <Text style={{ fontSize: 15, fontWeight: "bold" }}>{props.name}</Text>
-      <Text style={{ fontSize: 13, color: "gray" }}>30-45 • min</Text>
+      <Text style={{ fontSize: 13, color: "gray" }}>30-45 min</Text>
     </View>
     <View
       style={{
