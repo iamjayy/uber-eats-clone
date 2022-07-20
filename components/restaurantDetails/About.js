@@ -1,17 +1,29 @@
 import * as React from "react";
 import { View, Text, Image } from "react-native";
 
-const image =
-  "https://static4.depositphotos.com/1015060/494/i/600/depositphotos_4947647-stock-photo-restaurant.jpg";
+const yelpRestaurantInfo = {
+  name: "Farmhouse Kitchen Thai Cuisine",
+  image:
+    "https://static4.depositphotos.com/1015060/494/i/600/depositphotos_4947647-stock-photo-restaurant.jpg",
+  price: "$$",
+  reviews: "1500",
+  rating: "4.5",
+  categories: [{ title: "Thai" }, { title: "Comfort Food" }],
+};
 
-const title = "Farmhouse Kitchen Thai Cuisine";
-const description = "A farmhouse restaurant in the heart of the city";
+const { name, image, price, reviews, rating, categories } = yelpRestaurantInfo;
+
+const formattedCategories = categories.map((cat) => cat.title).join(" • ");
+
+const description = `${formattedCategories} ${
+  price ? " • " + price : ""
+} • 🎫 • ${rating} ⭐ (${reviews}+)`;
 
 export default function About() {
   return (
     <View>
       <RestaurantImage image={image} />
-      <RestaurantTitle title={title} />
+      <RestaurantName title={name} />
       <RestaurantDescription description={description} />
     </View>
   );
@@ -21,7 +33,7 @@ const RestaurantImage = (props) => (
   <Image source={{ uri: props.image }} style={{ width: "100%", height: 180 }} />
 );
 
-const RestaurantTitle = (props) => (
+const RestaurantName = (props) => (
   <Text
     style={{
       fontSize: 29,
