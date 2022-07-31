@@ -32,7 +32,7 @@ const RestaurantName = (props) => (
       marginTop: 10,
     }}
   >
-    {props.title}
+    {props.name}
   </Text>
 );
 
