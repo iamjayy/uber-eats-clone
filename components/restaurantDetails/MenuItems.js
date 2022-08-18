@@ -60,10 +60,14 @@ const styles = StyleSheet.create({
 export default function MenuItems(restaurantName) {
   const dispatch = useDispatch();
 
-  const selectItem = (item) => {
+  const selectItem = (item, checkboxValue) => {
     dispatch({
       type: "ADD_TO_CART",
-      payload: { ...item, restaurantName: restaurantName },
+      payload: {
+        ...item,
+        restaurantName: restaurantName,
+        checkboxValue: checkboxValue,
+      },
     });
   };
 
@@ -78,7 +82,7 @@ export default function MenuItems(restaurantName) {
                 borderRadius: 0,
               }}
               fillColor="green"
-              onPress={() => selectItem(food)}
+              onPress={(checkboxValue) => selectItem(food, checkboxValue)}
             />
             <FoodInfo food={food} />
             <FoodImage food={food} />
