@@ -16,38 +16,50 @@ export default function ViewCart() {
   console.log(totalUSD);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        flexDirection: "row",
-        position: "absolute",
-        justifyContent: "center",
-        bottom: 110,
-        zIndex: 999,
-      }}
-    >
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
-        <TouchableOpacity
+    <>
+      {total ? (
+        <View
           style={{
-            marginTop: 20,
-            backgroundColor: "black",
+            flex: 1,
             alignItems: "center",
-            padding: 13,
-            borderRadius: 30,
-            width: 300,
-            position: "relative",
+            flexDirection: "row",
+            position: "absolute",
+            justifyContent: "center",
+            bottom: 110,
+            zIndex: 999,
           }}
         >
-          <Text style={{ color: "white", fontSize: 20 }}>View Cart</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                marginTop: 20,
+                backgroundColor: "black",
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                padding: 15,
+                padding: 13,
+                borderRadius: 30,
+                width: 300,
+                position: "relative",
+              }}
+            >
+              <Text style={{ color: "white", fontSize: 20, marginRight: 30 }}>
+                View Cart
+              </Text>
+              <Text style={{ color: "white", fontSize: 20 }}>{totalUSD}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
